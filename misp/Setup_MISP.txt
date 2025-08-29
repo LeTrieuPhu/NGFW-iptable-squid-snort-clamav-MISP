@@ -1,0 +1,10 @@
+# download misp
+wget --no-cache -O /tmp/INSTALL.sh https://raw.githubusercontent.com/MISP/MISP/2.4/INSTALL/INSTALL.sh ; bash /tmp/INSTALL.sh -c -M
+
+# truy cập <ip firewall>
+
+User: admin@admin.test
+Password: admin
+change password: PHUoggy22521100
+
+Authkey: di2rl6eXSlaShTqPx159c7TZNquVG4a6XPjEQqwD

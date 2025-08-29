@@ -1,0 +1,104 @@
+########## thay đổi IP VMware ##########
+sudo nano /etc/netplan/00-installer-config.yaml
+network:
+  ethernets:
+    ens33:
+      dhcp4: no
+      addresses: [192.168.60.1/24]  # Địa chỉ IP tĩnh bạn muốn
+      gateway4: 192.168.60.254      # Gateway của mạng
+      nameservers:
+        addresses: [8.8.8.8, 8.8.4.4]  # DNS server
+  version: 2
+sudo netplan apply
+
+########## forward gói tin trên firewall ##########
+sudo nano /etc/sysctl.conf
+sudo sysctl -w net.ipv4.ip_forward=1
+sudo sysctl -p
+
+########## nat ip lan sang internet ##########
+sudo iptables -t nat -A POSTROUTING -o ens33 -j MASQUERADE
+
+########## Lưu cấu hình iptables vĩnh viễn ##########
+sudo apt-get install iptables-persistent
+sudo netfilter-persistent save
+
+########## kiểm tra iptables ##########
+sudo iptables -L --line-numbers -v -n
+sudo iptables -t nat -L --line-numbers -v -n
+
+########## xóa rules ##########
+sudo iptables -D [CHAIN] [LINE_NUMBER]
+
+########## xóa tất cả rules ##########
+sudo iptables -F
+
+
+
+############################ file cấu hình ban đầu #############################################
+
+#!/bin/bash
+
+########## xóa rules cũ ##########
+sudo iptables -F
+sudo iptables -t nat -F
+
+########## cài đặt phần mềm lưu cấu hình Iptables ##########
+sudo apt-get install iptables-persistent -y
+
+########## Forword cac goi tin ##########
+sudo iptables -A FORWARD -i ens33 -j NFQUEUE --queue-num 0
+sudo iptables -t nat -A POSTROUTING -o ens33 -j MASQUERADE
+
+########## chỉ cho User 1 ping đến Server DVWA ##########
+sudo iptables -A FORWARD -s 192.168.100.10 -d 192.168.200.30 -p icmp --icmp-type echo-request -j ACCEPT
+sudo iptables -A FORWARD -s 192.168.200.30 -d 192.168.100.10 -p icmp --icmp-type echo-reply -j ACCEPT
+
+########## Chặn tất cả lưu lượng ngoài giờ hành chính ##########
+sudo iptables -A FORWARD -s 192.168.100.10 -d 192.168.200.30 -p tcp --dport 80 \
+  -m time --kerneltz --timestart 08:00 --timestop 17:00 --weekdays Mon,Tue,Wed,Thu,Fri -j ACCEPT
+sudo iptables -A FORWARD -s 192.168.100.10 -d 192.168.200.30 -p tcp --dport 443 \
+  -m time --kerneltz --timestart 08:00 --timestop 17:00 --weekdays Mon,Tue,Wed,Thu,Fri -j ACCEPT
+
+########## chỉ cho phép User 1 (192.168.100.10) truy cập Internet ##########
+sudo iptables -A FORWARD -s 192.168.100.10 -o ens33 -j ACCEPT
+
+########## Chặn tất cả các yêu cầu khác từ mạng nội bộ ra Internet ##########
+sudo iptables -A FORWARD -s 192.168.100.0/24 -o ens33 -j DROP
+
+########## Luu iptables ##########
+sudo netfilter-persistent save
+
+#####################################################################################################################
+
+########## phụ ##########
+
+# Kiểm tra thời gian hiện tại
+timedatectl
+
+# Đổi múi giờ thành HCM
+sudo timedatectl set-timezone Asia/Ho_Chi_Minh
+
+# Set RTC về giờ địa phương 
+sudo timedatectl set-local-rtc 1
+
+mở port:
+sudo nano /etc/cups/cupsd.conf
+Listen 0.0.0.0:1100
+sudo systemctl restart cups
+sudo ss -tuln | grep 1100
+
+kích hoạt UFW:
+sudo ufw enable
+sudo ufw allow 1100/(tcp/udp)
+sudo ufw status
+
+
+
+
+
+
+
+
+
+	

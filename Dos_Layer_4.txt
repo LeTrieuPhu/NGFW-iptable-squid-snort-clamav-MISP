@@ -1,0 +1,10 @@
+# Bật SYN cookies
+sysctl -w net.ipv4.tcp_syncookies=1
+
+# Giới hạn kết nối chưa bắt tay thành công
+iptables -A INPUT -p tcp --syn --dport 80 -m connlimit --connlimit-above 10 -j DROP
+
+# Giới hạn tốc độ gói SYN đến cổng 80
+iptables -A INPUT -p tcp --dport 80 --syn -m limit --limit 15/second --limit-burst 30 -j ACCEPT
+iptables -A INPUT -p tcp --dport 80 --syn -j DROP
+

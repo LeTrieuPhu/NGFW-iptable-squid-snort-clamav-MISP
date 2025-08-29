@@ -1,0 +1,50 @@
+# Số lượng users, events, attributes theo thời gian.
+UsageDataWidget.php - không hỗ trợ biểu đồ
+
+# So sánh tần suất từng attribute (IP, domain, hash...) trong khoảng thời gian, đánh dấu tăng đột biến.
+TrendingAttributesWidget.php
+{
+    "time_window": "7d",
+    "threshold": "15",
+    "type": [
+        "ip-src"
+    ],
+    "to_ids": [
+        "1"
+    ]
+}
+{
+    "time_window": "7d",
+    "threshold": "15",
+    "type": [
+        "ip-dst"
+    ],
+    "to_ids": [
+        "1"
+    ]
+}
+
+# hống kê tag trên events
+TrendingTagsWidget.php
+{
+  "time_window": "7d",
+  "threshold": 15,
+  "includeLocalTags": true
+}
+
+
+#Sử dụng ZMQ pub-sub để cập nhật ngay sự kiện mới được tạo ra.
+EventStreamWidget.php
+{
+    "limit": "20"
+}
+
+# Kết nối tới thống kê thời gian thực và vẽ đồ thị tăng/giảm.
+EventEvolutionLineWidget.php
+{
+  "start_date": "2025-06-01",
+  "org_filter": {
+    "name": ["ORGNAME"]
+  },
+  "cumulative": "false"
+}

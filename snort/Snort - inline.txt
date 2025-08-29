@@ -1,0 +1,39 @@
+################################ Snort - inline #########################################
+
+1. Cài đặt snort
+sudo apt-get install snort
+
+2. Kiểm tra version
+snort --version
+
+3. kiểm tra daq list
+sudo snort --daq-list
+
+4. xóa rules mặc định
+sudo rm -fr /etc/snort/rules/*
+
+5. tạo file NGFW.rules
+sudo touch /etc/snort/rules/NGFW.rules
+
+6. tạo file NGFW.conf
+sudo touch /etc/snort/NGFW.conf
+
+7. cấu hình file NGFW.conf                                                                               /etc/snort/NGFW.conf                                                                                         
+config daq: nfq
+config daq_mode: inline
+config policy_mode: inline
+config daq_var: queue=0
+
+preprocessor http_inspect: global iis_unicode_map unicode.map 1252
+
+preprocessor http_inspect_server: server default profile all ports { 80 8080 8180 } oversize_dir_length 500
+
+include /etc/snort/rules/NGFW.rules
+
+8. Chạy snort ở inline mode
+sudo snort -Q -c /etc/snort/NGFW.conf
+
+#10. đọc log và xóa log 
+cat /var/log/snort/alert
+sudo tail -F /var/log/snort/aler
+sudo truncate -s 0 /var/log/snort/alert

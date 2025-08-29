@@ -1,0 +1,69 @@
+1. SQL Injection Attempt
+- Rule:
+drop tcp any any -> 192.168.200.30 80 \
+(\
+    msg:"SQL Injection Attempt";\
+    flow:to_server,established;\
+    content:"%27+OR+%271%27%3D%271"; nocase;\
+    threshold:type threshold, track by_src, count 10, seconds 60;\ 
+    sid:1000001;\
+    rev:1\
+)
+- Cách test từ Kali:
+truy cập: http://192.168.200.30/DVWA/vulnerabilities/sqli/
+nhập: ' OR '1'='1
+
+2. DoS / Slowloris (sid:1000007)
+- Rule:
+alert tcp any any -> 192.168.200.30 80 \
+(\
+    msg:"DoS or Slowloris Attempt";\
+    flow:to_server,established;\
+    threshold: type both, track by_src, count 100, seconds 30;\ 
+    sid:1000002;\ 
+    rev:1\ 
+)
+- Cách test:
+python3 slowloris.py 192.168.200.30 -p 80 -s 100
+sudo hping3 -c 100 -d 120 -S -w 64 -p 80 --flood --rand-source 192.168.200.30
+3. Port Scan Detection (sid:1000005)
+- Rule:
+alert tcp any any -> 192.168.200.30 any\
+(\ 
+    msg:"Port scan attempt - Web Server";\
+    flags:S;\
+    threshold:type both , track by_src, count 50, seconds 60;\ 
+    sid:1000003;\ 
+    rev:1\ 
+)
+- Cách test:
+sudo nmap -sS 192.168.200.30 --max-rate 1000
+
+4. Brute Force Login Detection:
+- rule
+alert tcp any any -> 192.168.200.30 80 \
+(\
+    msg:"WEB_SERVER DVWA Brute Force Attempt";\
+    flow:to_server,established;\
+    file_data; pcre:"/username.*password/i";\
+    threshold: type both, track by_src, count 5, seconds 20;\
+    sid:1000004;\
+    rev:1;\
+)
+
+alert tcp any any -> 192.168.200.30 80 \
+(\
+    msg:"WEB_SERVER DVWA Brute Force Attempt";\
+    flow:to_server,established;\
+    pcre:"/username.*password/i";\
+    threshold: type both, track by_src, count 5, seconds 20;\
+    sid:1000005;\
+    rev:1;\
+)
+
+
+
+
+
+
+

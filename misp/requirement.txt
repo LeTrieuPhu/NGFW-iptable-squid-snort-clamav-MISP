@@ -1,0 +1,2 @@
+python -m pip install google-generativeai
+python3 -m pip install pymisp
