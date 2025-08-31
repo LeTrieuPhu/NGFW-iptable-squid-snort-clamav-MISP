@@ -24,7 +24,8 @@ network:
       gateway4: 192.168.60.254      # Gateway của mạng
     nameservers:
       addresses: [8.8.8.8, 8.8.4.4]  # DNS server
-  version: 2 ```
+  version: 2
+
 - Bước 3: sudo netplan apply
 - Bước 4: kiểm tra lại địa chỉ ip: ip -a
 2. 
