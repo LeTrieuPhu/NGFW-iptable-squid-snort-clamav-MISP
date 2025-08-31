@@ -50,4 +50,5 @@ sudo sysctl -w net.ipv4.ip_forward=1
 ```bash
 sudo sysctl -p
 ```
-3. ****
+3. **Rule iptable**
+- Rule chi tiết nằm trong file **/iptable/SetupIPTABLES.txt**
