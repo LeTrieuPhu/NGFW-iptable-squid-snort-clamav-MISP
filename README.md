@@ -13,7 +13,10 @@ Tường lửa thế hệ mới tích hợp các chức năng như Stateful fire
 
 # Hướng dẫn cấu hình
 1. **Cấu hình IP trên Ubuntu**
-- Bước 1: sudo nano /etc/netplan/00-installer-config.yaml
+- Bước 1:
+```bash
+sudo nano /etc/netplan/00-installer-config.yaml
+```
 - Bước 2: Copy nội dụng vào file
 ```yaml
 network:
@@ -27,7 +30,10 @@ network:
   version: 2
 ```
 - Bước 3: sudo netplan apply
-- Bước 4: kiểm tra lại địa chỉ ip: ip -a
+- Bước 4: kiểm tra lại địa chỉ ip:
+```bash
+ip -a
+```
 2. **Cấu hình forward gói tin trên firewall**
 - Cấu hình cứng: Sửa giá trị net.ipv4.ip_forward trong file /etc/sysctl.conf thành 1
 ```bash
