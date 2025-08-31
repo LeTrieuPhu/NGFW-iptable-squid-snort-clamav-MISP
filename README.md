@@ -28,4 +28,8 @@ network:
 ```
 - Bước 3: sudo netplan apply
 - Bước 4: kiểm tra lại địa chỉ ip: ip -a
-2. 
+2. Cấu hình forward gói tin trên firewall
+- Cấu hình cứng: Sửa giá trị net.ipv4.ip_forward trong file /etc/sysctl.conf thành 1. sudo nano /etc/sysctl.conf
+- Cấu hình động (sẽ khôi phục lại ban đầu nếu khởi động lại firewall): sudo sysctl -w net.ipv4.ip_forward=1
+- Kiểm tra: sudo sysctl -p
+3. 
