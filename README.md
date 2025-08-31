@@ -11,7 +11,7 @@ Tường lửa thế hệ mới tích hợp các chức năng như Stateful fire
 # Application-Data Architecture
 ![Application-Data Architecture](https://github.com/LeTrieuPhu/NGFW-iptable-squid-snort-clamav-MISP/blob/main/report/Application-Data%20Architecture.png)
 
-# Hướng dẫn cấu hình
+# Hướng dẫn cấu hình địa chỉ IP và iptable
 1. **Cấu hình IP trên Ubuntu**
 - Bước 1:
 ```bash
@@ -52,3 +52,58 @@ sudo sysctl -p
 ```
 3. **Rule iptable**
 - Rule chi tiết nằm trong file **/iptable/SetupIPTABLES.txt**
+
+# Cài đặt và cấu hình Squid
+1. **Cài đặt**
+```bash
+sudo apt install squid
+```
+2. **Kiểm tra**
+```bash
+squid --version
+```
+3. **Tạo danh sách Web được phép truy cập**
+```bash
+sudo nano /etc/squid/allowsites
+```
+4. **Thêm URL**
+Ví Dụ:
+```bash
+student.uit.edu.vn
+daa.uit.edu.vn
+courses.uit.edu.vn
+.youtube.com
+.eicar.org
+```
+5. **Cấu hình Squid**
+- Mở file cấu hình
+```bash
+sudo nano /etc/squid/squid.conf
+```
+- Tìm kiếm vị trí cấu hình
+  - Nhấn tổ hợp phím **ctrl + W** để mở thành tìm kiếm
+  - Nhập **'acl local'**
+  - Enter
+- Dán nội dụng bên dưới vào:
+```bash
+# allow site
+acl allowsites dstdomain "/etc/squid/allowsites"
+http_access allow allowsites
+http_access deny all
+
+# xac thuc dang nhap ldap
+auth_param basic program /usr/lib/squid/basic_ldap_auth -b "dc=nt140,dc=local" -f "uid=%s" -h 192.168.100.40
+auth_param basic children 5
+auth_param basic realm Proxy Authentication
+auth_param basic credentialsttl 2 hours
+
+# Định nghĩa ACL cho người dùng đã xác thực
+acl authenticated proxy_auth REQUIRED
+http_access allow authenticated
+http_access deny all
+```
+- khởi động lại Squid
+```bash
+sudo systemctl restart squid
+```
+6. 
