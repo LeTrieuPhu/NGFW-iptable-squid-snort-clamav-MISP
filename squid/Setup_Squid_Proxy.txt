@@ -14,7 +14,7 @@ ctrl + W -> acl local -> Enter (Gõ lệnh)
 ########## Tao danh sach web cho phep ##########
 sudo nano /etc/squid/allowsites                                   
 
-***Thêm domain các url cần chặn ******
+***Thêm domain các url ******
 student.uit.edu.vn
 daa.uit.edu.vn
 courses.uit.edu.vn
