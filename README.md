@@ -10,3 +10,20 @@ Tường lửa thế hệ mới tích hợp các chức năng như Stateful fire
 
 # Application-Data Architecture
 ![Application-Data Architecture](https://github.com/LeTrieuPhu/NGFW-iptable-squid-snort-clamav-MISP/blob/main/report/Application-Data%20Architecture.png)
+
+# Hướng dẫn cấu hình
+1. Cấu hình IP trên Ubuntu
+    - Bước 1: sudo nano /etc/netplan/00-installer-config.yaml
+    - Bước 2: Copy nội dụng vào file
+          network:
+            ethernets:
+              ens33:
+                dhcp4: no
+                addresses: [192.168.60.1/24]  # Địa chỉ IP tĩnh bạn muốn
+                gateway4: 192.168.60.254      # Gateway của mạng
+                nameservers:
+                  addresses: [8.8.8.8, 8.8.4.4]  # DNS server
+            version: 2
+    - Bước 3: sudo netplan apply
+    - Bước 4: kiểm tra lại địa chỉ ip: ip -a
+2. 
