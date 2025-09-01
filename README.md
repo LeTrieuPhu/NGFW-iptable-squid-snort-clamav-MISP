@@ -1,6 +1,16 @@
 ## Next Generation Firewall
 Tường lửa thế hệ mới tích hợp các chức năng như Stateful firewall(iptable), Proxy(Squid), IDPS(Snort), AntiVirus(ClamAV) và phần mềm chia sẻ mối đe dọa(MISP)
-
+## Mục Lục
+- [Sơ đồ mạng](#Sơ-đồ-mạng)
+- [Functional Architecture]()
+- [Application-Data Architecture]()
+- [Hướng dẫn cấu hình địa chỉ IP và iptable]()
+- [Cài đặt và cấu hình Squid]()
+- [Cài đặt và cấu hình Snort]()
+- [Cài đặt và cấu hình ClamAV và CICAP]()
+- [Cài đặt và sử dụng MISP]()
+- [Cài đặt và cấu hình DVWA]()
+- [Cài đặt và Cấu hình LDAP Server và LDAP Client]()
 # Sơ đồ mạng
 ![Sơ đồ mạng](https://github.com/LeTrieuPhu/NGFW-iptable-squid-snort-clamav-MISP/blob/main/report/Tong%20quan.png)
 
