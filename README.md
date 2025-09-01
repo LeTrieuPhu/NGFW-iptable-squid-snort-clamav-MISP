@@ -197,7 +197,50 @@ sudo systemctl status clamav-daemon
 > ```bash
 > sudo nano /var/log/clamav/clamav.log
 > ```
-2. 
+2. CICAP
+- Cài đặt
+```bash
+sudo apt install c-icap libicapapi-dev libc-icap-mod-virus-scan
+```
+- cấu hình /etc/c-icap/c-icap.conf
+```bash
+sudo nano /etc/c-icap/c-icap.conf
+```
+- Cấu hình tương tự
+```bash
+Include /etc/c-icap/virus_scan.conf
+PidFile /run/c-icap/c-icap.pid
+CommandsSocket /run/c-icap/c-icap.ctl
+Timeout 300
+MaxKeepAliveRequests 100
+KeepAliveTimeout 600
+StartServers 3
+MaxServers 10
+ThreadsPerChild 10
+Port 1344
+User c-icap
+Group c-icap
+TmpDir /var/tmp
+MaxMemObject 131072
+DebugLevel 1
+ModulesDir /usr/lib/x86_64-linux-gnu/c_icap
+ServicesDir /usr/lib/x86_64-linux-gnu/c_icap
+TemplateDir /usr/share/c_icap/templates/
+TemplateDefaultLanguage en
+LoadMagicFile /etc/c-icap/c-icap.magic
+acl all src 0.0.0.0/0.0.0.0
+acl PERMIT_REQUESTS type REQMOD RESPMOD
+icap_access allow all PERMIT_REQUESTS
+ServerLog /var/log/c-icap/server.log
+AccessLog /var/log/c-icap/access.log
+```
+- Tắt các dịch vụ nội bộ không cần thiết (tuỳ chọn)
+```bash
+# Service url_check_module srv_url_check.so
+```
+> ℹ️ **Lưu ý:** thư mục **/usr/lib/x86_64-linux-gnu/c_icap**: xem đúng đường dẫn chưa và kiểm tra xem có virus_scan.so clamd_mod.so, nếu chưa phải tự tìm hiểu cài đặt. Còn mấy thư mục khác không quan trọng
+- 
+3. 
 
 
 # Cài đặt và sử dụng MISP
