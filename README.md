@@ -368,3 +368,6 @@ http://<ip_may_dvwa>/DVWA
 Username: admin
 Password: password
 ```
+# Cài đặt và Cấu hình LDAP Server và LDAP Client
+1. LDAP Server: [Video Hướng Dẫn](https://www.youtube.com/watch?v=yGJERaeZmKc) và [tài liệu tham khảo](https://github.com/LeTrieuPhu/NGFW-iptable-squid-snort-clamav-MISP/blob/main/ldap-squid-clamav/Setup_LDAP_Server.txt)
+2. LDAP Client: [Video Hướng Dẫn](https://www.youtube.com/watch?v=WDdXcUG-Awk) và [tài liệu tham khảo](https://github.com/LeTrieuPhu/NGFW-iptable-squid-snort-clamav-MISP/blob/main/ldap-squid-clamav/Setup_LDAP_Client.txt)
