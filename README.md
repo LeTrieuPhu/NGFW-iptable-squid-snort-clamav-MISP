@@ -385,8 +385,8 @@ Password: password
 # Hướng dẫn sử dụng và Khả năng chính của các công cụ
 1. iptable: khả năng Forward và NAT, Chặn IP, Ping, Telnet, SSH đến server khi không được phép.
 2. Squid + LDAP: Xác thực người dùng qua tài khoản LDAP và giới hạn URL có thể truy cập từ người dùng nộ bộ. Có thể kiếm tra bằng cách:
-- Truy cập 1 URL ngoài danh sách Allowsites: Kết quả mong đợi là không thẻ truy cập web.
-- Truy cập vào 1 URL trong danh sách Allowsites: Kết quả mong đợi là yêu cầu đăng nhập tài khoản và mật khẩu trước khi truy cập web. Nếu đúng tài khoản và mật khẩu mới được phép truy cập.
+  - Truy cập 1 URL ngoài danh sách Allowsites: Kết quả mong đợi là không thẻ truy cập web.
+  - Truy cập vào 1 URL trong danh sách Allowsites: Kết quả mong đợi là yêu cầu đăng nhập tài khoản và mật khẩu trước khi truy cập web. Nếu đúng tài khoản và mật khẩu mới được phép truy cập.
 3. Squid + ClamAV: Khi tải file từ internet, Firewall sẽ quét virus trên file này. Nếu an toàn, file sẽ được tải về, ngược lại Firewall sẽ cảnh báo dưới dạng html.
 4. Snort: Phát hiện và ngăn chặn các cuộc tấn công đến DVWA như: SQL Injection, DoS hoặc Slowloris, Port Scan và Brute Force. Cách kiểm tra được viết trong file [Rule_Snort.txt](https://github.com/LeTrieuPhu/NGFW-iptable-squid-snort-clamav-MISP/blob/main/snort/Rule_Snort.txt)
 5.
