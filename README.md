@@ -159,7 +159,8 @@ sudo snort -Q -c /etc/snort/NGFW.conf
 wget --no-cache -O /tmp/INSTALL.sh https://raw.githubusercontent.com/MISP/MISP/2.4/INSTALL/INSTALL.sh ; bash /tmp/INSTALL.sh -c -M
 ```
 - Truy cập Web: **IP của Host cài MISP**
-ℹ️ **Lưu ý:**
+
+>ℹ️ **Lưu ý:**
 - User: admin@admin.test
 - Password: admin
 - Lưu lại **Authkey** của Admin, Key sẽ bị mã hóa
