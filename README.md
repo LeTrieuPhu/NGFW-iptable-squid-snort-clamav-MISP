@@ -12,7 +12,9 @@ Tường lửa thế hệ mới tích hợp các chức năng như Stateful fire
 ![Application-Data Architecture](https://github.com/LeTrieuPhu/NGFW-iptable-squid-snort-clamav-MISP/blob/main/report/Application-Data%20Architecture.png)
 
 # Hướng dẫn cấu hình địa chỉ IP và iptable
->ℹ️ **Lưu ý:** Sử dụng Ubuntu 22.04 trở lên
+>ℹ️ **Lưu ý:**
+> Sử dụng Ubuntu 22.04 trở lên
+> iptable, squid, snort, ClamAV, MISP được cấu hình trên cùng một máy firewall
 1. **Cấu hình IP trên Ubuntu**
 - Bước 1:
 ```bash
@@ -163,6 +165,12 @@ wget --no-cache -O /tmp/INSTALL.sh https://raw.githubusercontent.com/MISP/MISP/2
 >ℹ️ **Lưu ý:**
 >- User: admin@admin.test
 >- Password: admin
->- Lưu lại **Authkey** của Admin, Key sẽ bị mã hóa
+>- Lưu lại **Authkey** của Admin, kết thúc phiên Key sẽ bị mã hóa
 >- Nếu cài đặt không được, hãy thử đường dẫn này [install.sh](https://github.com/LeTrieuPhu/NGFW-iptable-squid-snort-clamav-MISP/blob/main/misp/install.sh)
-2. 
+# Cài đặt và cấu hình DVWA
+1. Cập nhật hệ thống
+```bash
+sudo apt update && sudo apt upgrade -y
+```
+2. Cài Apache, PHP, MariaDB, Git
+3. 
