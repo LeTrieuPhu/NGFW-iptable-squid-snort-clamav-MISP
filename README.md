@@ -154,6 +154,28 @@ sudo snort -Q -c /etc/snort/NGFW.conf
 ```
 6. Rule snort
 - Rule chi tiết nằm trong file [Rule_Snort.txt](https://github.com/LeTrieuPhu/NGFW-iptable-squid-snort-clamav-MISP/blob/main/snort/Rule_Snort.txt)
+# Cài đặt và cấu hình ClamAV và CICAP
+1. ClamAV
+- Cài đặt
+```bash
+sudo apt install clamav clamav-daemon clamav-freshclam
+```
+- Sửa file /etc/clamav/clamd.conf
+```bash
+sudo nano /etc/clamav/clamd.conf
+```
+  - command localsocket
+```bash
+# LocalSocket /run/clamav/clamd.sock
+```
+  - Thêm IP(gateway mạng nội bộ), thêm port
+```bash
+TCPSocket 3310
+TCPAddr 192.168.100.1
+```
+2. 
+
+
 # Cài đặt và sử dụng MISP
 1. Cài đặt MISP
 - Cài đặt
