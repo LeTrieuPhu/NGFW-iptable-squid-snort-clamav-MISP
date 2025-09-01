@@ -359,7 +359,10 @@ sudo chmod -R 755 /var/www/html/DVWA
 ```bash
 sudo systemctl restart apache2
 ```
-9. Truy cập từ trình duyệt: **http://<ip_may_dvwa>/DVWA**
+9. Truy cập từ trình duyệt:
+```bash
+http://<ip_may_dvwa>/DVWA
+```
 10. Đăng nhập
 ```bash
 Username: admin
