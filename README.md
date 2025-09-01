@@ -164,11 +164,11 @@ sudo apt install clamav clamav-daemon clamav-freshclam
 ```bash
 sudo nano /etc/clamav/clamd.conf
 ```
-  - command localsocket
+      - command localsocket
 ```bash
 # LocalSocket /run/clamav/clamd.sock
 ```
-  - Thêm IP(gateway mạng nội bộ), thêm port
+      - Thêm IP(gateway mạng nội bộ), thêm port
 ```bash
 TCPSocket 3310
 TCPAddr 192.168.100.1
