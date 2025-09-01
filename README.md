@@ -414,15 +414,10 @@ key =
 python3 misp_create_event.py
 ```
 # Demo
-1. Video demo Scan Port
-[Scan Port](https://youtu.be/0LRx5qiB1y4)
-2. Video demo SQL Injection
-![SQL Injection]()
-3. Video demo Dos
-![Dos]()
-4. Video demo Brute Force
-![Brute Force]()
-5. Video demo Malware Download
-![Malware Download]()
+1. Video demo Scan Port: [Scan Port](https://youtu.be/UQziTJoV83g)
+2. Video demo SQL Injection: [SQL Injection](https://youtu.be/qDLPRNkfOPo)
+3. Video demo Dos: [Dos](https://youtu.be/bctcO3JmCd0)
+4. Video demo Brute Force: [Brute Force](https://youtu.be/0LRx5qiB1y4)
+5. Video demo Malware Download: [Malware Download](https://youtu.be/iWAVN-VuTTE)
 6. Dashboard
 ![Dashboard](https://github.com/LeTrieuPhu/NGFW-iptable-squid-snort-clamav-MISP/blob/main/report/Dashboard.png)
