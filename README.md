@@ -413,6 +413,7 @@ key =
 ```bash
 python3 misp_create_event.py
 ```
+- Thống số thiết kế Dashboard: [Widget_misp.txt](https://github.com/LeTrieuPhu/NGFW-iptable-squid-snort-clamav-MISP/blob/main/misp/Widget_misp.txt)
 # Demo
 1. Video demo Scan Port: [Scan Port](https://youtu.be/UQziTJoV83g)
 2. Video demo SQL Injection: [SQL Injection](https://youtu.be/qDLPRNkfOPo)
