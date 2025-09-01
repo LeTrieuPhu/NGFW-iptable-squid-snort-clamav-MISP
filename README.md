@@ -205,9 +205,7 @@ sudo apt install c-icap libicapapi-dev libc-icap-mod-virus-scan
 - cấu hình /etc/c-icap/c-icap.conf
 ```bash
 sudo nano /etc/c-icap/c-icap.conf
-```
 - Cấu hình tương tự
-```bash
 Include /etc/c-icap/virus_scan.conf
 PidFile /run/c-icap/c-icap.pid
 CommandsSocket /run/c-icap/c-icap.ctl
@@ -239,6 +237,20 @@ AccessLog /var/log/c-icap/access.log
 # Service url_check_module srv_url_check.so
 ```
 > ℹ️ **Lưu ý:** thư mục **/usr/lib/x86_64-linux-gnu/c_icap**: xem đúng đường dẫn chưa và kiểm tra xem có virus_scan.so clamd_mod.so, nếu chưa phải tự tìm hiểu cài đặt. Còn mấy thư mục khác không quan trọng
+- Chỉnh sửa hoặc tạo nếu chưa có file /etc/c-icap/virus_scan.conf
+```bash
+sudo nano /etc/c-icap/virus_scan.conf
+- Cấu hình tương tự
+Service antivirus_module virus_scan.so
+ServiceAlias srv_clamav virus_scan
+ServiceAlias avscan virus_scan?allow204=on&sizelimit=off&mode=simple
+virus_scan.ScanFileTypes TEXT DATA EXECUTABLE ARCHIVE
+virus_scan.SendPercentData 5
+virus_scan.StartSendPercentDataAfter 2M
+virus_scan.MaxObjectSize 5M
+virus_scan.DefaultEngine clamd
+Include /etc/c-icap/clamd_mod.conf
+```
 - 
 3. 
 
