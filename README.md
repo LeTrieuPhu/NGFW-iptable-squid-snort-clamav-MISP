@@ -206,7 +206,7 @@ sudo apt install c-icap libicapapi-dev libc-icap-mod-virus-scan
 ```bash
 sudo nano /etc/c-icap/c-icap.conf
 
-**Cấu hình tương tự**
+Cấu hình tương tự
 
 Include /etc/c-icap/virus_scan.conf
 PidFile /run/c-icap/c-icap.pid
@@ -243,7 +243,7 @@ AccessLog /var/log/c-icap/access.log
 ```bash
 sudo nano /etc/c-icap/virus_scan.conf
 
-**Cấu hình tương tự**
+Cấu hình tương tự
 
 Service antivirus_module virus_scan.so
 ServiceAlias srv_clamav virus_scan
@@ -255,7 +255,30 @@ virus_scan.MaxObjectSize 5M
 virus_scan.DefaultEngine clamd
 Include /etc/c-icap/clamd_mod.conf
 ```
-- 
+> ℹ️ **Lưu ý:** **virus_scan** ở **"ServiceAlias srv_clamav virus_scan"** là module còn srv_clamav là dịch vụ mình sẽ gọi trong squid
+- Sửa hoặc tạo nếu chưa có file /etc/c-icap/clamd_mod.conf
+```bash
+sudo nano /etc/c-icap/clamd_mod.conf
+
+Cấu hình tương tự
+
+Module common clamd_mod.so
+clamd_mod.ClamdHost 192.168.100.1
+clamd_mod.ClamdPort 3310
+```
+> ℹ️ **Lưu ý:** **IP** và **Port** phải trùng với ip và port được cấu hình ở **clamd**
+- Khởi động và kiểm tra dịch vụ
+```bash
+sudo systemctl restart c-icap
+sudo systemctl enable --now c-icap
+
+sudo systemctl status c-icap
+```
+> ℹ️ **Lưu ý:** Log của CICAP
+> ```bash
+> /var/log/c-icap/server.log
+> /var/log/c-icap/access.log
+> ```
 3. 
 
 
