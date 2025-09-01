@@ -279,8 +279,23 @@ sudo systemctl status c-icap
 > /var/log/c-icap/server.log
 > /var/log/c-icap/access.log
 > ```
-3. 
-
+3. Tích hợp vào Squid
+- Cấu hình trong /etc/squid/squid.conf
+```bash
+sudo nano /etc/squid/squid.conf
+```
+- Cấu hình tương tự, thường cấu hình ở cuối file
+```bash
+icap_enable on
+icap_send_client_ip on
+icap_preview_enable on
+icap_preview_size 1024
+icap_service avscan_req  reqmod_precache icap://192.168.100.1:1344/srv_clamav bypass=off
+adaptation_access avscan_req allow all
+icap_service avscan_resp respmod_precache icap://192.168.100.1:1344/srv_clamav bypass=off
+adaptation_access avscan_resp allow all
+```
+> ℹ️ **Lưu ý: thay đổi IP thành IP Gateway của mạng nội bộ** và dịch vụ sau port phải trùng với dịch vụ được cấu hình trong file **/etc/c-icap/virus_scan.conf**
 
 # Cài đặt và sử dụng MISP
 1. Cài đặt MISP
@@ -290,7 +305,7 @@ wget --no-cache -O /tmp/INSTALL.sh https://raw.githubusercontent.com/MISP/MISP/2
 ```
 - Truy cập Web: **IP của Host cài MISP**
 
->ℹ️ **Lưu ý:**
+>ℹ️ **Lưu ý:** 
 >- User: admin@admin.test
 >- Password: admin
 >- Lưu lại **Authkey** của Admin, kết thúc phiên Key sẽ bị mã hóa
