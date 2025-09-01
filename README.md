@@ -390,4 +390,21 @@ Password: password
     - Truy cập vào 1 URL trong danh sách Allowsites: Kết quả mong đợi là **yêu cầu đăng nhập** tài khoản và mật khẩu trước khi truy cập web. Nếu **đúng tài khoản và mật khẩu mới được phép truy cập.**
 3. **Squid + ClamAV:** Khi tải file từ internet, Firewall sẽ **quét virus trên file này**. **Nếu an toàn**, file sẽ được tải về, ngược lại Firewall sẽ **cảnh báo dưới dạng html.**
 4. **Snort: Phát hiện và ngăn chặn** các cuộc tấn công đến DVWA như: **SQL Injection, DoS hoặc Slowloris, Port Scan và Brute Force.** Cách kiểm tra được viết trong file [Rule_Snort.txt](https://github.com/LeTrieuPhu/NGFW-iptable-squid-snort-clamav-MISP/blob/main/snort/Rule_Snort.txt)
-5.
+5. **MISP**
+- Cài đặt các thư viện cần thiết: [requirements.txt](https://github.com/LeTrieuPhu/NGFW-iptable-squid-snort-clamav-MISP/blob/main/misp/requirement.txt)
+```bash
+pip install -r requirements.txt
+```
+- Cấu hình file [config.ini](https://github.com/LeTrieuPhu/NGFW-iptable-squid-snort-clamav-MISP/blob/main/misp/config.ini)
+```bash
+[MISP]
+url = https://192.168.100.1
+key = 
+
+[GEMINI]
+key =
+```
+> ℹ️ **Lưu ý:**
+> - url: là đường dẫn web của MISP
+> - MISP key: là Authkey của mỗi tài khoản trên MISP (có thể là admin hoặc là tài khoản được tạo mới)
+> - Gemini Key: là API key của Gemini, dùng để gọi API của Gemini
