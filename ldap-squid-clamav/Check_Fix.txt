@@ -1,0 +1,63 @@
+########## Kiểm tra ClamAV ##########
+- kiểm tra status: thấy running là đúng
+sudo systemctl status clamav-daemon
+
+
+########## Kiểm tra C-ICAP ##########
+- kiểm tra status: thấy running là đúng, nếu chưa đúng thì ở phần kết quả sẽ có thêm một dòng hướng dẫn điều chỉnh 
+sudo systemctl status c-icap
+
+
+########## tương tự kiểm tra squid ##########
+- kiểm tra status:
+sudo systemctl status squid
+
+
+# test tải file bị nhiễm virus
+- đầu tiên là tải trực tiếp trên máy file firewall và test: https://www.rexswain.com/eicar-test.com
+clamscan eicar-test.com (1)
+
+- tải file từ user và kiểm tra kết quả (chỉ quét được lưu lượng http -  https chưa làm được):
+truy cập http://malware.wicar.org/data/eicar.com
+
+- kết quả:
++ (1) FOUND có nghĩa là đã chặn thành công - nếu không chặn được sẽ hiện OK
+/home/firewall/Downloads/eicar-test.com: Eicar-Signature FOUND
+
+----------- SCAN SUMMARY -----------
+Known viruses: 8707198
+Engine version: 0.103.12
+Scanned directories: 0
+Scanned files: 1
+Infected files: 1
+Data scanned: 0.00 MB
+Data read: 0.00 MB (ratio 0.00:1)
+Time: 24.867 sec (0 m 24 s)
+Start Date: 2025:05:30 19:02:52
+End Date:   2025:05:30 19:03:17
+
++ (2) phản hồi bằng giao diện web thông báo
+
+########## kiểm khi gặp sự cố ##########
+- kiểm tra server log
+sudo nano /var/log/c-icap/server.log
+
+- kiểm tra mở port
+sudo ss -tulnp | grep 3310
+
+
+########## 1 số biện pháp khắc phực sự cố ##########
+- khởi động lại clamav
+sudo systemctl stop clamav-freshclam
+sudo freshclam
+sudo systemctl start clamav-freshclam
+sudo systemctl enable --now clamav-freshclam
+
+- khởi động lại c-icap
+sudo systemctl restart c-icap
+sudo systemctl enable --now c-icap
+
+- khởi động lại squid
+sudo systemctl restart squid
+
+- đợi một khoảng thời gian nếu lần gần nhất bạn scan được

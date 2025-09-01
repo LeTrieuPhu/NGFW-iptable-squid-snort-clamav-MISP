@@ -1,0 +1,15 @@
+# Tích hợp Squid với ClamAV
+- cấu hình trong /etc/squid/squid.conf
+sudo nano /etc/squid/squid.conf
+
+- cấu hình tương tự - thường cấu hình ở cuối file:
+icap_enable on
+icap_send_client_ip on
+icap_preview_enable on
+icap_preview_size 1024
+icap_service avscan_req  reqmod_precache icap://192.168.100.1:1344/srv_clamav bypass=off
+adaptation_access avscan_req allow all
+icap_service avscan_resp respmod_precache icap://192.168.100.1:1344/srv_clamav bypass=off
+adaptation_access avscan_resp allow all
+
+- Chú ý: thay đổi ip thành ip khác, không phải ip localhost là được và dịch vụ sau port phải trùng với dịch vụ được cấu hình trong file /etc/c-icap/virus_scan.conf

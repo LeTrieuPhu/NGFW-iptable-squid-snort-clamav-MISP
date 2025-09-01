@@ -1,0 +1,37 @@
+# set domain
+sudo nano /etc/hosts
+
+192.168.30.129   nt140.local
+
+
+# tải thư viện
+sudo apt install libnss-ldap libpam-ldap ldap-utils nscd -y
+
+ldap://192.168.30.129
+3
+yes
+no
+cn=admin,dc=nt140,dc=local
+
+
+#
+sudo nano /etc/nsswitch.conf
+
+passwd:  compat system ldap
+group:   compat system ldap
+shadow:  compat
+gshadow: files
+
+sudo nano /etc/pam.d/common-password
+
+password [success=1 .... -> delete use_authtok
+
+sudo nano /etc/pam.d/common-session
+add -> session optional pam_mkhomedir.so skel=/etc/skel umask=077
+
+sudo systemctl restart nscd
+sudo systemctl enable nscd
+
+test: ldapsearch -x -H ldap://192.168.100.40 -b "dc=NT534,dc=local"
+
+test login: sudo login

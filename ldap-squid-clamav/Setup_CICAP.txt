@@ -1,0 +1,76 @@
+########## Cài đặt và cấu hình c-icap ##########
+- cài đặt thư viện:
+sudo apt install c-icap libicapapi-dev libc-icap-mod-virus-scan
+
+- cấu hình /etc/c-icap/c-icap.conf:
+sudo nano /etc/c-icap/c-icap.conf
+
+- cấu hình tượng tự:
+Include /etc/c-icap/virus_scan.conf
+PidFile /run/c-icap/c-icap.pid
+CommandsSocket /run/c-icap/c-icap.ctl
+Timeout 300
+MaxKeepAliveRequests 100
+KeepAliveTimeout 600
+StartServers 3
+MaxServers 10
+ThreadsPerChild 10
+Port 1344
+User c-icap
+Group c-icap
+TmpDir /var/tmp
+MaxMemObject 131072
+DebugLevel 1
+ModulesDir /usr/lib/x86_64-linux-gnu/c_icap
+ServicesDir /usr/lib/x86_64-linux-gnu/c_icap
+TemplateDir /usr/share/c_icap/templates/
+TemplateDefaultLanguage en
+LoadMagicFile /etc/c-icap/c-icap.magic
+acl all src 0.0.0.0/0.0.0.0
+acl PERMIT_REQUESTS type REQMOD RESPMOD
+icap_access allow all PERMIT_REQUESTS
+ServerLog /var/log/c-icap/server.log
+AccessLog /var/log/c-icap/access.log
+
+- Tắt các dịch vụ nội bộ không cần thiết (tuỳ chọn):
+Service url_check_module srv_url_check.so
+
+- chú ý thư mục /usr/lib/x86_64-linux-gnu/c_icap: xem đúng đường dẫn chưa và kiểm tra xem có virus_scan.so clamd_mod.so, nếu chưa phải tự tìm hiểu cài đặt. Còn mấy thư mục khác không quan trọng
+
+- chỉnh sửa hoặc tạo nếu chưa có file /etc/c-icap/virus_scan.conf:
+sudo nano /etc/c-icap/virus_scan.conf
+
+- cấu hình tương tự:
+Service antivirus_module virus_scan.so
+ServiceAlias srv_clamav virus_scan
+ServiceAlias avscan virus_scan?allow204=on&sizelimit=off&mode=simple
+virus_scan.ScanFileTypes TEXT DATA EXECUTABLE ARCHIVE
+virus_scan.SendPercentData 5
+virus_scan.StartSendPercentDataAfter 2M
+virus_scan.MaxObjectSize 5M
+virus_scan.DefaultEngine clamd
+Include /etc/c-icap/clamd_mod.conf
+
+- chú ý: virus_scan ở "ServiceAlias srv_clamav virus_scan" là module còn srv_clamav là dịch vụ mình sẽ gọi trong squid
+
+- sửa hoặc tạo nếu chưa có file /etc/c-icap/clamd_mod.conf:
+sudo nano /etc/c-icap/clamd_mod.conf
+
+-cấu hình tương tự:
+Module common clamd_mod.so
+clamd_mod.ClamdHost 192.168.100.1
+clamd_mod.ClamdPort 3310
+
+- chú ý: ip và port phải trùng với ip và port được cấu hình ở clamd
+
+- khởi động dịch vụ: 
+sudo systemctl restart c-icap
+sudo systemctl enable --now c-icap
+
+sudo systemctl status c-icap
+
+- log:
+/var/log/c-icap/server.log
+/var/log/c-icap/access.log
+
+

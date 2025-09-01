@@ -1,0 +1,30 @@
+# Cài đặt và cấu hình ClamAV
+sudo apt install clamav clamav-daemon clamav-freshclam
+
+- sửa file /etc/clamav/clamd.conf, command localsocket lại, thêm ip thêm port
+sudo nano /etc/clamav/clamd.conf
+# LocalSocket /run/clamav/clamd.sock
+TCPSocket 3310
+TCPAddr 192.168.100.1
+
+
+- Kiểm tra đã mở port chưa:
+sudo ss -tulnp | grep 3310
+
+- nếu đợi chưa thấy mở thì restart:
+sudo systemctl restart clamav-daemon
+
+- Cập nhật chữ ký:
+sudo systemctl stop clamav-freshclam
+sudo freshclam
+sudo systemctl start clamav-freshclam
+sudo systemctl enable --now clamav-freshclam
+
+- khởi động cho nhận chữ ký và kiểm tra status:
+sudo systemctl restart clamav-daemon
+sudo systemctl status clamav-daemon
+
+- log
+sudo nano /var/log/clamav/clamav.log
+
+
