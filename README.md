@@ -295,7 +295,7 @@ adaptation_access avscan_req allow all
 icap_service avscan_resp respmod_precache icap://192.168.100.1:1344/srv_clamav bypass=off
 adaptation_access avscan_resp allow all
 ```
-> ℹ️ **Lưu ý: thay đổi IP thành IP Gateway của mạng nội bộ** và dịch vụ sau port phải trùng với dịch vụ được cấu hình trong file **/etc/c-icap/virus_scan.conf**
+> ℹ️ **Lưu ý: Thay đổi IP thành IP Gateway của mạng nội bộ** và dịch vụ sau port phải trùng với dịch vụ được cấu hình trong file **/etc/c-icap/virus_scan.conf**
 
 # Cài đặt và sử dụng MISP
 1. Cài đặt MISP
