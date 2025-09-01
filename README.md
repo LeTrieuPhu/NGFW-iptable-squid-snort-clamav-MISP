@@ -11,6 +11,7 @@ Tường lửa thế hệ mới tích hợp các chức năng như Stateful fire
 - [Cài đặt và sử dụng MISP](#Cài-đặt-và-sử-dụng-MISP)
 - [Cài đặt và cấu hình DVWA](#Cài-đặt-và-cấu-hình-DVWA)
 - [Cài đặt và Cấu hình LDAP Server và LDAP Client](#Cài-đặt-và-Cấu-hình-LDAP-Server-và-LDAP-Client)
+- [Hướng dẫn sử dụng và Khả năng chính của các công cụ](#Hướng-dẫn-sử-dụng-và-Khả-năng-chính-của-các-công-cụ)
 # Sơ đồ mạng
 ![Sơ đồ mạng](https://github.com/LeTrieuPhu/NGFW-iptable-squid-snort-clamav-MISP/blob/main/report/Tong%20quan.png)
 
@@ -387,6 +388,6 @@ Password: password
 2. **Squid + LDAP:** Xác thực người dùng qua **tài khoản LDAP** và **giới hạn URL** có thể truy cập từ **người dùng nộ bộ**. Có thể kiếm tra bằng cách:
     - Truy cập 1 URL ngoài danh sách Allowsites: Kết quả mong đợi là **không thẻ truy cập web.**
     - Truy cập vào 1 URL trong danh sách Allowsites: Kết quả mong đợi là **yêu cầu đăng nhập** tài khoản và mật khẩu trước khi truy cập web. Nếu **đúng tài khoản và mật khẩu mới được phép truy cập.**
-3. Squid + ClamAV: Khi tải file từ internet, Firewall sẽ **quét virus trên file này**. **Nếu an toàn**, file sẽ được tải về, ngược lại Firewall sẽ **cảnh báo dưới dạng html.**
-4. Snort: **Phát hiện và ngăn chặn** các cuộc tấn công đến DVWA như: **SQL Injection, DoS hoặc Slowloris, Port Scan và Brute Force.** Cách kiểm tra được viết trong file [Rule_Snort.txt](https://github.com/LeTrieuPhu/NGFW-iptable-squid-snort-clamav-MISP/blob/main/snort/Rule_Snort.txt)
+3. **Squid + ClamAV:** Khi tải file từ internet, Firewall sẽ **quét virus trên file này**. **Nếu an toàn**, file sẽ được tải về, ngược lại Firewall sẽ **cảnh báo dưới dạng html.**
+4. **Snort: Phát hiện và ngăn chặn** các cuộc tấn công đến DVWA như: **SQL Injection, DoS hoặc Slowloris, Port Scan và Brute Force.** Cách kiểm tra được viết trong file [Rule_Snort.txt](https://github.com/LeTrieuPhu/NGFW-iptable-squid-snort-clamav-MISP/blob/main/snort/Rule_Snort.txt)
 5.
