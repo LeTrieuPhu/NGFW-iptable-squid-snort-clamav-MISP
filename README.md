@@ -205,7 +205,9 @@ sudo apt install c-icap libicapapi-dev libc-icap-mod-virus-scan
 - cấu hình /etc/c-icap/c-icap.conf
 ```bash
 sudo nano /etc/c-icap/c-icap.conf
-- Cấu hình tương tự
+
+**Cấu hình tương tự**
+
 Include /etc/c-icap/virus_scan.conf
 PidFile /run/c-icap/c-icap.pid
 CommandsSocket /run/c-icap/c-icap.ctl
@@ -240,7 +242,9 @@ AccessLog /var/log/c-icap/access.log
 - Chỉnh sửa hoặc tạo nếu chưa có file /etc/c-icap/virus_scan.conf
 ```bash
 sudo nano /etc/c-icap/virus_scan.conf
-- Cấu hình tương tự
+
+**Cấu hình tương tự**
+
 Service antivirus_module virus_scan.so
 ServiceAlias srv_clamav virus_scan
 ServiceAlias avscan virus_scan?allow204=on&sizelimit=off&mode=simple
