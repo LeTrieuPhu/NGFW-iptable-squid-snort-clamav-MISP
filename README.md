@@ -12,6 +12,7 @@ Tường lửa thế hệ mới tích hợp các chức năng như Stateful fire
 - [Cài đặt và cấu hình DVWA](#Cài-đặt-và-cấu-hình-DVWA)
 - [Cài đặt và Cấu hình LDAP Server và LDAP Client](#Cài-đặt-và-Cấu-hình-LDAP-Server-và-LDAP-Client)
 - [Hướng dẫn sử dụng và Khả năng chính của các công cụ](#Hướng-dẫn-sử-dụng-và-Khả-năng-chính-của-các-công-cụ)
+- [Demo](#Demo)
 # Sơ đồ mạng
 ![Sơ đồ mạng](https://github.com/LeTrieuPhu/NGFW-iptable-squid-snort-clamav-MISP/blob/main/report/Tong%20quan.png)
 
@@ -412,3 +413,16 @@ key =
 ```bash
 python3 misp_create_event.py
 ```
+# Demo
+1. Video demo Scan Port
+![Scan Port](https://github.com/LeTrieuPhu/NGFW-iptable-squid-snort-clamav-MISP/blob/main/report/Scan_Port.mp4)
+2. Video demo SQL Injection
+![SQL Injection]()
+3. Video demo Dos
+![Dos]()
+4. Video demo Brute Force
+![Brute Force]()
+5. Video demo Malware Download
+![Malware Download]()
+6. Dashboard
+![Dashboard](https://github.com/LeTrieuPhu/NGFW-iptable-squid-snort-clamav-MISP/blob/main/report/Dashboard.png)
