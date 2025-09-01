@@ -408,7 +408,7 @@ key =
 > - url: là đường dẫn web của MISP
 > - MISP key: là Authkey của mỗi tài khoản trên MISP (có thể là admin hoặc là tài khoản được tạo mới)
 > - Gemini Key: là API key của Gemini, dùng để gọi API của Gemini
-- Tự động hóa phân tích IOC từ Log của Snort, ClamAV và tạo event MISP đồng thời tự động cập nhật rule chặn ip cho iptable và domain độc hại vào blacklist: [misp_create_event](https://github.com/LeTrieuPhu/NGFW-iptable-squid-snort-clamav-MISP/blob/main/misp/misp_create_event.py)
+- Tự động hóa phân tích IOC từ Log của Snort, ClamAV và tạo event MISP, đồng thời tự động cập nhật rule chặn IP cho iptable và domain độc hại vào blacklist từ IOC trên MISP: [misp_create_event](https://github.com/LeTrieuPhu/NGFW-iptable-squid-snort-clamav-MISP/blob/main/misp/misp_create_event.py)
 ```bash
 python3 misp_create_event.py
 ```
