@@ -149,3 +149,5 @@ include /etc/snort/rules/NGFW.rules
 ```bash
 sudo snort -Q -c /etc/snort/NGFW.conf
 ```
+6. Rule snort
+- Rule chi tiết nằm trong file Rule_Snort.txt(https://github.com/LeTrieuPhu/NGFW-iptable-squid-snort-clamav-MISP/blob/main/snort/Rule_Snort.txt)
