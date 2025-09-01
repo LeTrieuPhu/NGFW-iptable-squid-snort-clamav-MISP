@@ -106,7 +106,7 @@ http_access deny all
 ```bash
 sudo systemctl restart squid
 ```
-ℹ️ **Lưu ý:** 'dc=nt140,dc=local' là domain được tạo bởi LDAP và '192.168.100.40' là địa chỉ IP của Host mà LDAP được cài đặt lên đó
+ℹ️ **Lưu ý: 'dc=nt140,dc=local'** là domain được tạo bởi LDAP và **'192.168.100.40'** là địa chỉ IP của **Host** mà **LDAP được cài đặt lên đó**
 # Cài đặt và cấu hình Snort
 1. Cài đặt và Kiểm tra phiên bản
 ```bash
@@ -144,7 +144,7 @@ preprocessor http_inspect_server: server default profile all ports { 80 8080 818
 
 include /etc/snort/rules/NGFW.rules
 ```
-ℹ️ **Lưu ý:** 'queue=0' hàng đợi này phải được định tuyến trong rule của iptable
+ℹ️ **Lưu ý: 'queue=0'** hàng đợi này phải được định tuyến trong **rule của iptable**
 5. Chạy snort Inline mode
 ```bash
 sudo snort -Q -c /etc/snort/NGFW.conf
