@@ -51,7 +51,7 @@ sudo sysctl -w net.ipv4.ip_forward=1
 sudo sysctl -p
 ```
 3. **Rule iptable**
-- Rule chi tiết nằm trong file **/iptable/SetupIPTABLES.txt**
+- Rule chi tiết nằm trong file [SetupIPTABLES.txt](https://github.com/LeTrieuPhu/NGFW-iptable-squid-snort-clamav-MISP/blob/main/iptables/SetupIPTABLES.txt)
 
 # Cài đặt và cấu hình Squid
 1. **Cài đặt**
