@@ -106,4 +106,44 @@ http_access deny all
 ```bash
 sudo systemctl restart squid
 ```
-6. 
+# Cài đặt và cấu hình Snort
+1. Cài đặt và Kiểm tra phiên bản
+```bash
+sudo apt-get install snort
+snort --version
+```
+2. Kiểm tra daq list
+```bash
+sudo snort --daq-list
+```
+- Đảm bảo **nfq** đã được cài đặt
+3. Xóa rule mặc định của Snort và tạo file rule mới
+- Xóa rules mặc định
+```bash
+sudo rm -fr /etc/snort/rules/*
+```
+- tạo file NGFW.rules với tên file tùy ý
+```bash
+sudo touch /etc/snort/rules/NGFW.rules
+```
+4. Tạo và cấu hình file NGFW.conf
+- Tạo file NGFW.conf
+```bash
+sudo touch /etc/snort/NGFW.conf
+```
+- Cấu hình file NGFW.conf
+```bash
+config daq: nfq
+config daq_mode: inline
+config policy_mode: inline
+config daq_var: queue=0
+
+preprocessor http_inspect: global iis_unicode_map unicode.map 1252
+preprocessor http_inspect_server: server default profile all ports { 80 8080 8180 } oversize_dir_length 500
+
+include /etc/snort/rules/NGFW.rules
+```
+5. Chạy snort Inline mode
+```bash
+sudo snort -Q -c /etc/snort/NGFW.conf
+```
