@@ -316,4 +316,52 @@ wget --no-cache -O /tmp/INSTALL.sh https://raw.githubusercontent.com/MISP/MISP/2
 sudo apt update && sudo apt upgrade -y
 ```
 2. Cài Apache, PHP, MariaDB, Git
-3. 
+```bash
+sudo apt install apache2 php php-mysqli php-gd libapache2-mod-php mariadb-server git -y
+```
+3. Khởi động dịch vụ
+```bash
+sudo systemctl enable apache2
+sudo systemctl start apache2
+sudo systemctl enable mariadb
+sudo systemctl start mariadb
+```
+4. Tạo CSDL cho DVWA
+```bash
+sudo mysql -e "CREATE DATABASE dvwa;"
+sudo mysql -e "CREATE USER 'dvwa'@'localhost' IDENTIFIED BY 'dvwa123';"
+sudo mysql -e "GRANT ALL PRIVILEGES ON dvwa.* TO 'dvwa'@'localhost';"
+sudo mysql -e "FLUSH PRIVILEGES;"
+```
+5. Tải mã nguồn DVWA
+```bash
+cd /var/www/html
+sudo git clone https://github.com/digininja/DVWA.git
+```
+6. Cấu hình DVWA
+```bash
+cd /var/www/html/DVWA/config
+sudo cp config.inc.php.dist config.inc.php
+sudo nano config.inc.php
+
+# Chỉnh các dòng sau
+
+$_DVWA[ 'db_user' ] = 'dvwa';
+$_DVWA[ 'db_password' ] = 'dvwa123';
+$_DVWA[ 'db_server' ] = '127.0.0.1';
+```
+7. Phân quyền
+```bash
+sudo chown -R www-data:www-data /var/www/html/DVWA
+sudo chmod -R 755 /var/www/html/DVWA
+```
+8. Khởi động lại Apache
+```bash
+sudo systemctl restart apache2
+```
+9. Truy cập từ trình duyệt: **http://<ip_may_dvwa>/DVWA**
+10. Đăng nhập
+```bash
+Username: admin
+Password: password
+```
