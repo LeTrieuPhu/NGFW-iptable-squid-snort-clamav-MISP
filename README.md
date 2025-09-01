@@ -12,7 +12,7 @@ Tường lửa thế hệ mới tích hợp các chức năng như Stateful fire
 ![Application-Data Architecture](https://github.com/LeTrieuPhu/NGFW-iptable-squid-snort-clamav-MISP/blob/main/report/Application-Data%20Architecture.png)
 
 # Hướng dẫn cấu hình địa chỉ IP và iptable
-ℹ️ **Lưu ý:** Sử dụng Ubuntu 22.04 trở lên
+>ℹ️ **Lưu ý:** Sử dụng Ubuntu 22.04 trở lên
 1. **Cấu hình IP trên Ubuntu**
 - Bước 1:
 ```bash
@@ -107,7 +107,7 @@ http_access deny all
 ```bash
 sudo systemctl restart squid
 ```
-ℹ️ **Lưu ý: 'dc=nt140,dc=local'** là domain được tạo bởi LDAP và **'192.168.100.40'** là địa chỉ IP của **Host** mà **LDAP được cài đặt lên đó**
+>ℹ️ **Lưu ý: 'dc=nt140,dc=local'** là domain được tạo bởi LDAP và **'192.168.100.40'** là địa chỉ IP của **Host** mà **LDAP được cài đặt lên đó**
 # Cài đặt và cấu hình Snort
 1. Cài đặt và Kiểm tra phiên bản
 ```bash
@@ -145,7 +145,7 @@ preprocessor http_inspect_server: server default profile all ports { 80 8080 818
 
 include /etc/snort/rules/NGFW.rules
 ```
-ℹ️ **Lưu ý: 'queue=0'** hàng đợi này phải được định tuyến trong **rule của iptable**
+>ℹ️ **Lưu ý: 'queue=0'** hàng đợi này phải được định tuyến trong **rule của iptable**
 5. Chạy snort Inline mode
 ```bash
 sudo snort -Q -c /etc/snort/NGFW.conf
@@ -161,8 +161,8 @@ wget --no-cache -O /tmp/INSTALL.sh https://raw.githubusercontent.com/MISP/MISP/2
 - Truy cập Web: **IP của Host cài MISP**
 
 >ℹ️ **Lưu ý:**
-- User: admin@admin.test
-- Password: admin
-- Lưu lại **Authkey** của Admin, Key sẽ bị mã hóa
-- Nếu cài đặt không được, hãy thử đường dẫn này [install.sh](https://github.com/LeTrieuPhu/NGFW-iptable-squid-snort-clamav-MISP/blob/main/misp/install.sh)
+>- User: admin@admin.test
+>- Password: admin
+>- Lưu lại **Authkey** của Admin, Key sẽ bị mã hóa
+>- Nếu cài đặt không được, hãy thử đường dẫn này [install.sh](https://github.com/LeTrieuPhu/NGFW-iptable-squid-snort-clamav-MISP/blob/main/misp/install.sh)
 2. 
