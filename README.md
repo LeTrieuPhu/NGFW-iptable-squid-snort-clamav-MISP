@@ -12,6 +12,7 @@ Tường lửa thế hệ mới tích hợp các chức năng như Stateful fire
 ![Application-Data Architecture](https://github.com/LeTrieuPhu/NGFW-iptable-squid-snort-clamav-MISP/blob/main/report/Application-Data%20Architecture.png)
 
 # Hướng dẫn cấu hình địa chỉ IP và iptable
+ℹ️ **Lưu ý:** Sử dụng Ubuntu 22.04 trở lên
 1. **Cấu hình IP trên Ubuntu**
 - Bước 1:
 ```bash
@@ -151,3 +152,16 @@ sudo snort -Q -c /etc/snort/NGFW.conf
 ```
 6. Rule snort
 - Rule chi tiết nằm trong file [Rule_Snort.txt](https://github.com/LeTrieuPhu/NGFW-iptable-squid-snort-clamav-MISP/blob/main/snort/Rule_Snort.txt)
+# Cài đặt và sử dụng MISP
+1. Cài đặt MISP
+- Cài đặt
+```bash
+wget --no-cache -O /tmp/INSTALL.sh https://raw.githubusercontent.com/MISP/MISP/2.4/INSTALL/INSTALL.sh ; bash /tmp/INSTALL.sh -c -M
+```
+- Truy cập Web: **IP của Host cài MISP**
+ℹ️ **Lưu ý:**
+- User: admin@admin.test
+- Password: admin
+- Lưu lại **Authkey** của Admin, Key sẽ bị mã hóa
+- Nếu cài đặt không được, hãy thử đường dẫn này [install.sh](https://github.com/LeTrieuPhu/NGFW-iptable-squid-snort-clamav-MISP/blob/main/misp/install.sh)
+2. 
